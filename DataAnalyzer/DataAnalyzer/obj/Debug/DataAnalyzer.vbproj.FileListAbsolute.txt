@@ -10,3 +10,15 @@ C:\Users\kk515go\source\repos\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.v
 C:\Users\kk515go\source\repos\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.exe
 C:\Users\kk515go\source\repos\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.xml
 C:\Users\kk515go\source\repos\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.pdb
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\bin\Debug\DataAnalyzer.exe.config
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\bin\Debug\DataAnalyzer.exe
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\bin\Debug\DataAnalyzer.pdb
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\bin\Debug\DataAnalyzer.xml
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.vbprojAssemblyReference.cache
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.Form1.resources
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.Resources.resources
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.vbproj.GenerateResource.cache
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.vbproj.CoreCompileInputs.cache
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.exe
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.xml
+C:\Deveropment\Lab\DataAnalyzer\DataAnalyzer\obj\Debug\DataAnalyzer.pdb

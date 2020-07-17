@@ -35,18 +35,27 @@
 
             '#### open fine ####
             FileSystem.FileOpen(7, fn, OpenMode.Input)
-            For i = 1 To Xran  '## X number '##
+            For i = 1 To Xran Step 1 '## X number '##
 
-                For j = 1 To Yran '### Y number  ##
+                For j = 1 To Yran Step 1 '### Y number  ##
                     Input(7, sute)
-                    Double.TryParse(sute, suteD)
+                    suteD = Double.Parse(sute)
+                    Console.WriteLine(suteD)
                     pdata(i, j) = suteD '### pdata ##
+
                 Next
                 Input(7, suteA)
+
             Next
 
             FileSystem.FileClose(7)
-            Console.WriteLine(pdata.Length)
+
         Next
+        Console.WriteLine(pdata(490, 490))
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class
