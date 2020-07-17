@@ -34,21 +34,11 @@
             fn = tn + ftn + ".dat" '#### file name "
 
             '#### open fine ####
-            FileSystem.FileOpen(7, fn, OpenMode.Input)
-            For i = 1 To Xran Step 1 '## X number '##
+            Using MyReader As New FileIO.TextFieldParser(fn)
+                MyReader.TextFieldType = FileIO.FieldType.Delimited
+                MyReader.SetDelimiters(",")
 
-                For j = 1 To Yran Step 1 '### Y number  ##
-                    Input(7, sute)
-                    suteD = Double.Parse(sute)
-                    Console.WriteLine(suteD)
-                    pdata(i, j) = suteD '### pdata ##
-
-                Next
-                Input(7, suteA)
-
-            Next
-
-            FileSystem.FileClose(7)
+            End Using
 
         Next
         Console.WriteLine(pdata(490, 490))
