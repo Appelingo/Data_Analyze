@@ -4,6 +4,7 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
         Dim PathOP As String
         Dim fns As String
         OpenFileDialog1.Title = "HHGspectrum"
@@ -19,9 +20,9 @@
         Dim ftn As String
         Dim fn As String
 
-        Dim Xran = 490
-        Dim Yran = 490
-        Dim FileMax = 10
+        Dim Xran = Integer.Parse(TextBox2.Text)
+        Dim Yran = Integer.Parse(TextBox3.Text)
+        Dim FileMax = Integer.Parse(TextBox4.Text)
         Dim pdata(Xran, Yran) As Double
         Dim sute, suteA As String
         Dim suteD As Double
@@ -49,4 +50,6 @@
             Console.WriteLine(pdata.Length)
         Next
     End Sub
+
+
 End Class
