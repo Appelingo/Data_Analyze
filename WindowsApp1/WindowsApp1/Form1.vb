@@ -16,6 +16,7 @@ Public Class Form1
     Dim Waves As New List(Of Double)
     Dim A As New List(Of Double)
     Dim B As New List(Of Double)
+    Dim En As New List(Of Double)
 
     Private Sub TextBox1_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs)
         If e.KeyChar < "0"c OrElse "9"c < e.KeyChar Then
@@ -70,7 +71,8 @@ Public Class Form1
                 .Minimum = -2
             End With
         End With
-
+        Chart5.ChartAreas(0).AxisX.Interval = Waves(D_trans.IndexOf(D_trans.Max))
+        Chart5.ChartAreas(0).AxisX.IsLabelAutoFit = True
         Chart4.Series(0).MarkerSize = 2
 
 
@@ -159,7 +161,7 @@ Public Class Form1
         Dim N = Tc_Dealed(cnt - 1) - Tc_Dealed(0)
         Dim delt_tc As New Double
         Dim temp_tc As New Double
-        For g = 0 To 30 Step 0.001
+        For g = 0 To 16 Step 0.001
             Dim F As New Double
             Dim an As New Double
             Dim bn As New Double
@@ -178,7 +180,7 @@ Public Class Form1
 
             F = Sqrt(an ^ 2 + bn ^ 2)
             D_trans.Add(F)
-            Waves.Add(g * h / (1.55 * ev))
+            Waves.Add(g)
         Next
 
     End Sub
