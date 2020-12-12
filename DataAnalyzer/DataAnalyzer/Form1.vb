@@ -391,7 +391,14 @@ Public Class MyData2D
     Public labelX As String
     Public labelY As String
     Public Size As Size
+    Public Maxima_indexes As List(Of Integer)
+    Public Minimal_indexes As List(Of Integer)
     Private Type As String
+
+    'ピークサーチ関連の定数
+    Public Const RANGE = 5 '接線を求める際に参照するデータの個数、必ず奇数にすること
+    Public Grads As List(Of Double)
+
     Sub New(xran As Integer, yran As Integer, pic As PictureBox, nameData As String, nameX As String, nameY As String)
         Me.Type = "PictureBox"
         Me.Xran = xran
@@ -522,5 +529,28 @@ Public Class MyData2D
         Me.PictureBox.Size = Me.Size
         Me.PictureBox.Image = Me.Image
         Me.PictureBox.Refresh()
+    End Sub
+
+    Sub output()
+        'Using writer = New StreamWriter("")
+    End Sub
+
+    Sub peakSerchY(ByVal Y As Integer)
+        For i = Math.Ceiling(RANGE / 2) To Yran - 1 - Math.Truncate(RANGE / 2) Step 1
+            Dim grad As Double
+            Dim a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0
+            For j = (-1) * Math.Truncate(RANGE / 2) To Math.Truncate(RANGE / 2) Step 1
+                a1 += (i + j) * Me.Data(i + j, Y)
+                a2 += (i + j)
+                a3 += Me.Data(i + j, Y)
+                a4 += (i + j) ^ 2
+            Next
+            grad = (RANGE * a1 - a2 * a3) / (RANGE * a4 - a2 ^ 2)
+            Me.Grads.Add(grad)
+        Next
+
+        For k = 1 To Me.Grads.Count() - 2 Step 1
+
+        Next
     End Sub
 End Class
