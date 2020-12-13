@@ -554,7 +554,20 @@ Public Class MyData2D
         Next
 
         For k = 1 To Me.Grads.Count() - 2 Step 1
-            'a
+            If Me.Grads(k - 1) >= 0 And Me.Grads(k) <= 0 Then
+                If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
+                    Maxima_indexes.Add(k - 1 + 2)
+                Else
+                    Maxima_indexes.Add(k + 2)
+                End If
+            ElseIf Me.Grads(k - 1) <= 0 Then And Me.Grads(k) => 0 Then
+               If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
+                    Minimal_indexes.Add(k - 1 + 2)
+                Else
+                    Minimal_indexes.Add(k + 2)
+                End If
+            End If
         Next
     End Sub
+
 End Class
