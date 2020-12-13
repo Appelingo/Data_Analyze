@@ -28,6 +28,10 @@ Public Class Form1
     Dim Signal_Strength() As MyData2D
     Dim signal11, signal12, signal13, signal14, signal15, signal16 As MyData2D
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Dim PathOP As String
@@ -550,7 +554,7 @@ Public Class MyData2D
         Next
 
         For k = 1 To Me.Grads.Count() - 2 Step 1
-
+            'a
         Next
     End Sub
 End Class
