@@ -99,7 +99,6 @@ Public Class Form1
             Datas(ff - 1) = New MyData2D(Xran, Yran, PictureBox1, "VMIの可視化画像(X-Y)", "X", "Y")
             Datas(ff - 1).setData(pdata)
             FileSystem.FileClose(1)
-            Console.WriteLine(ff)
         Next
 
 
@@ -280,7 +279,8 @@ Public Class Form1
                 unitesignals(d, 0) = summation
             Next
             Signal_Strength(sec).setData(unitesignals)
-            Signal_Strength(sec).plot()
+            Signal_Strength(sec).peakSerchY(0)
+            Signal_Strength(sec).plot_correct()
         Next
         With Chart1.Titles
             .Clear()
@@ -395,13 +395,14 @@ Public Class MyData2D
     Public labelX As String
     Public labelY As String
     Public Size As Size
-    Public Maxima_indexes As List(Of Integer)
-    Public Minimal_indexes As List(Of Integer)
+    Public Maxima_indexes As List(Of Integer) = New List(Of Integer)
+    Public Minimal_indexes As List(Of Integer) = New List(Of Integer)
     Private Type As String
 
     'ピークサーチ関連の定数
     Public Const RANGE = 5 '接線を求める際に参照するデータの個数、必ず奇数にすること
-    Public Grads As List(Of Double)
+    Public Grads As List(Of Double) = New List(Of Double)
+    Public Data_Correct As List(Of (Double, Double)) = New List(Of (Double, Double))
 
     Sub New(xran As Integer, yran As Integer, pic As PictureBox, nameData As String, nameX As String, nameY As String)
         Me.Type = "PictureBox"
@@ -551,10 +552,91 @@ Public Class MyData2D
             Next
             grad = (RANGE * a1 - a2 * a3) / (RANGE * a4 - a2 ^ 2)
             Me.Grads.Add(grad)
+            Console.WriteLine(Me.Grads(i))
         Next
 
         For k = 1 To Me.Grads.Count() - 2 Step 1
-            'a
+            Console.WriteLine(k)
+            If Me.Grads(k - 1) >= 0 And Me.Grads(k) <= 0 Then
+                If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
+                    Maxima_indexes.Add(k - 1 + 2)
+                Else
+                    Maxima_indexes.Add(k + 2)
+                End If
+            ElseIf Me.Grads(k - 1) <= 0 And Me.Grads(k) >= 0 Then
+                If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
+                    Minimal_indexes.Add(k - 1 + 2)
+                Else
+                    Minimal_indexes.Add(k + 2)
+                End If
+            End If
         Next
+
+        Dim head As Integer
+        Dim head_time As Double
+        Dim wid As Double
+        head = 0
+
+        For current = 0 To Me.Xran - 1 Step 1
+            If Me.Maxima_indexes.IndexOf(current) <> -1 Then
+                wid = 1.33 / (current - head + 1)
+                For j = head To current Step 1
+                    Me.Data_Correct.Add((head_time + wid * j, Me.Data(j, Y)))
+                Next
+                head = current + 1
+                head_time += 1.33
+            ElseIf Me.Minimal_indexes.IndexOf(current) <> -1 Then
+                wid = 1.33 / (current - head + 1)
+                For j = head To current Step 1
+                    Me.Data_Correct.Add((head_time + wid * j, Me.Data(j, Y)))
+                Next
+                head = current + 1
+                head_time += 1.33
+            Else
+
+            End If
+        Next
+
     End Sub
+
+    Sub plot_correct()
+        If Me.Type = "Chart" Then
+            Me.Chart.Series.Add(CType(Me.labelY, String))
+            Me.Chart.Series(CType(Me.labelY, String)).ChartType = DataVisualization.Charting.SeriesChartType.Point
+            Me.Chart.Titles.Add(Me.dataName)
+            Me.Chart.Series(CType(Me.labelY, String)).MarkerSize = 4
+            Me.Chart.Legends(0).MaximumAutoSize = 100
+
+            With Me.Chart.Titles.Item(0)
+                .Position.Auto = True
+                .Alignment = Drawing.ContentAlignment.BottomCenter
+                .Docking = Docking.Bottom
+            End With
+
+            For i = 0 To Me.Data_Correct.Count - 1 Step 1
+                Me.Chart.Series(CType(Me.labelY, String)).Points.AddXY(Me.Data_Correct(i).Item1, Me.Data_Correct(i).Item2)
+            Next
+
+
+            With Me.Chart.ChartAreas(0)
+                With .AxisX
+                    .Minimum = 0
+                    .Maximum = Me.Xran * 1.1
+                    .Interval = 1 * 10 ^ (-15)
+                    .Title = Me.labelX
+
+                End With
+
+                With .AxisY
+                    .Maximum = Me.Max * 1.1
+                    .Title = Me.labelY
+                End With
+            End With
+
+        Else
+            Console.WriteLine("このデータはChartに紐付けられていません。plot()を実行することはできません。")
+        End If
+
+    End Sub
+
 End Class
