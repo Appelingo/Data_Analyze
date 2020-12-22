@@ -299,6 +299,7 @@ Public Class Form1
         Dim head = 0
         Dim head_t = 0
         For sec = 0 To sections - 1 Step 1
+            Signal_Corrected(sec) = New List(Of (Double, Double))
             Dim back2, back1, now, front1, front2 As Double
             For x = 2 To FileMax - 1 - 2 Step 1
                 back2 = Signal_Strength(sec).Data(x - 2, 0)
@@ -311,17 +312,44 @@ Public Class Form1
                         Dim cnt = x - head
                         Dim wid = 1.33 / cnt
                         For i = head To x
-                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head))
+                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
                         Next
+                        head = x + 1
+                        head_t += 1.33
                     End If
                 ElseIf mode = "DOWN" Then
                     If back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
-
+                        Dim cnt = x - head
+                        Dim wid = 1.33 / cnt
+                        For i = head To x
+                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                        Next
+                        head = x + 1
+                        head_t += 1.33
                     End If
                 End If
             Next
         Next
 
+        Dim title2 = CType("信号強度[a.u.]", String)
+        Chart2.Series.Clear()
+        Chart2.Series.Add(title2)
+        Chart2.Series(title2).ChartType = DataVisualization.Charting.SeriesChartType.Point
+        Chart2.Titles.Add("信号強度とXUV-IR Delayの関係")
+        Chart2.Series(title2).MarkerSize = 4
+        Chart2.Legends(0).MaximumAutoSize = 100
+
+        With Chart2.Titles.Item(0)
+            .Position.Auto = True
+            .Alignment = Drawing.ContentAlignment.BottomCenter
+            .Docking = Docking.Bottom
+        End With
+
+        For sec = 0 To sections - 1 Step 1
+            For x = 0 To FileMax - 1 Step 1
+                Chart2.Series(title2).Points.AddXY(Signal_Corrected(sec)(x).Item2, Signal_Corrected(sec)(x).Item1)
+            Next
+        Next
         With Chart1.Titles
             .Clear()
             .Add("n次高調波の信号強度")

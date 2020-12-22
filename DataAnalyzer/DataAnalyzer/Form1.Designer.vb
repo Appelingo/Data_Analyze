@@ -24,6 +24,9 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -58,6 +61,7 @@ Partial Class Form1
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +73,7 @@ Partial Class Form1
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -360,11 +365,28 @@ Partial Class Form1
         Me.TextBox7.TabIndex = 39
         Me.TextBox7.Text = "6"
         '
+        'Chart2
+        '
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
+        Me.Chart2.Location = New System.Drawing.Point(5, 114)
+        Me.Chart2.Name = "Chart2"
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart2.Series.Add(Series1)
+        Me.Chart2.Size = New System.Drawing.Size(1238, 557)
+        Me.Chart2.TabIndex = 40
+        Me.Chart2.Text = "Chart2"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 749)
+        Me.Controls.Add(Me.Chart2)
         Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Chart1)
@@ -410,6 +432,7 @@ Partial Class Form1
         CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -449,4 +472,5 @@ Partial Class Form1
     Friend WithEvents Chart1 As DataVisualization.Charting.Chart
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
 End Class
