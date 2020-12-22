@@ -29,6 +29,7 @@ Public Class Form1
     Dim Signal_Strength() As MyData2D
     Dim signal11, signal12, signal13, signal14, signal15, signal16 As MyData2D
 
+    Dim Signal_Corrected() As List(Of (Double, Double))
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -291,9 +292,36 @@ Public Class Form1
                 unitesignals(d, 0) = summation
             Next
             Signal_Strength(sec).setData(unitesignals)
-            Signal_Strength(sec).peakSerchY(0)
-            Signal_Strength(sec).plot()
         Next
+
+        ReDim Signal_Corrected(sections)
+        Dim mode = "UP"
+        Dim head = 0
+        Dim head_t = 0
+        For sec = 0 To sections - 1 Step 1
+            Dim back2, back1, now, front1, front2 As Double
+            For x = 2 To FileMax - 1 - 2 Step 1
+                back2 = Signal_Strength(sec).Data(x - 2, 0)
+                back1 = Signal_Strength(sec).Data(x - 1, 0)
+                now = Signal_Strength(sec).Data(x, 0)
+                front1 = Signal_Strength(sec).Data(x + 1, 0)
+                front2 = Signal_Strength(sec).Data(x + 2, 0)
+                If mode = "UP" Then
+                    If back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
+                        Dim cnt = x - head
+                        Dim wid = 1.33 / cnt
+                        For i = head To x
+                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head))
+                        Next
+                    End If
+                ElseIf mode = "DOWN" Then
+                    If back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
+
+                    End If
+                End If
+            Next
+        Next
+
         With Chart1.Titles
             .Clear()
             .Add("n次高調波の信号強度")
@@ -302,7 +330,6 @@ Public Class Form1
             .AxisY.Title = "信号強度"
             .AxisY.Maximum = signalMax * 1.1
         End With
-
         unitedTotalX.draw()
         unitedTotalY.draw()
         unitedTotalR.draw()

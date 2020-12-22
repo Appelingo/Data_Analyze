@@ -337,9 +337,9 @@ Partial Class Form1
         Me.Chart1.ChartAreas.Add(ChartArea1)
         Legend1.Name = "Legend1"
         Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(696, 521)
+        Me.Chart1.Location = New System.Drawing.Point(12, 111)
         Me.Chart1.Name = "Chart1"
-        Me.Chart1.Size = New System.Drawing.Size(628, 490)
+        Me.Chart1.Size = New System.Drawing.Size(657, 560)
         Me.Chart1.TabIndex = 37
         Me.Chart1.Text = "Chart1"
         '
