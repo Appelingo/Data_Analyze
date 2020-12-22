@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Math
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports System.IO
 Public Class Form1
 
     Public Xran, Yran, FileMax As New Integer
@@ -28,6 +29,7 @@ Public Class Form1
     Dim Signal_Strength() As MyData2D
     Dim signal11, signal12, signal13, signal14, signal15, signal16 As MyData2D
 
+    Dim Signal_Corrected() As List(Of (Double, Double))
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -99,7 +101,6 @@ Public Class Form1
             Datas(ff - 1) = New MyData2D(Xran, Yran, PictureBox1, "VMIの可視化画像(X-Y)", "X", "Y")
             Datas(ff - 1).setData(pdata)
             FileSystem.FileClose(1)
-            Console.WriteLine(ff)
         Next
 
 
@@ -129,6 +130,17 @@ Public Class Form1
 
         For i = 0 To FileMax - 1 Step 1
             Datas(i).Image.Save(fns + Dataname + (i + 1).ToString + ".bmp")
+        Next
+
+        sections = Integer.Parse(TextBox7.Text)
+        For i = 0 To sections - 1 Step 1
+            Using writer = New StreamWriter(fns + Signal_Strength(i).dataName + ".dat", False)
+                For y = 0 To Signal_Strength(i).Yran - 1 Step 1
+                    For x = 0 To Signal_Strength(i).Xran Step 1
+                        writer.WriteLine(Signal_Strength(i).Data(x, y))
+                    Next
+                Next
+            End Using
         Next
     End Sub
 
@@ -280,9 +292,36 @@ Public Class Form1
                 unitesignals(d, 0) = summation
             Next
             Signal_Strength(sec).setData(unitesignals)
-            Signal_Strength(sec).peakSerchY(0)
-            Signal_Strength(sec).plot_correct()
         Next
+
+        ReDim Signal_Corrected(sections)
+        Dim mode = "UP"
+        Dim head = 0
+        Dim head_t = 0
+        For sec = 0 To sections - 1 Step 1
+            Dim back2, back1, now, front1, front2 As Double
+            For x = 2 To FileMax - 1 - 2 Step 1
+                back2 = Signal_Strength(sec).Data(x - 2, 0)
+                back1 = Signal_Strength(sec).Data(x - 1, 0)
+                now = Signal_Strength(sec).Data(x, 0)
+                front1 = Signal_Strength(sec).Data(x + 1, 0)
+                front2 = Signal_Strength(sec).Data(x + 2, 0)
+                If mode = "UP" Then
+                    If back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
+                        Dim cnt = x - head
+                        Dim wid = 1.33 / cnt
+                        For i = head To x
+                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head))
+                        Next
+                    End If
+                ElseIf mode = "DOWN" Then
+                    If back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
+
+                    End If
+                End If
+            Next
+        Next
+
         With Chart1.Titles
             .Clear()
             .Add("n次高調波の信号強度")
@@ -291,7 +330,6 @@ Public Class Form1
             .AxisY.Title = "信号強度"
             .AxisY.Maximum = signalMax * 1.1
         End With
-
         unitedTotalX.draw()
         unitedTotalY.draw()
         unitedTotalR.draw()
@@ -396,14 +434,15 @@ Public Class MyData2D
     Public labelX As String
     Public labelY As String
     Public Size As Size
-    Public Maxima_indexes As List(Of Integer)
-    Public Minimal_indexes As List(Of Integer)
+    Public Maxima_indexes As List(Of Integer) = New List(Of Integer)
+    Public Minimal_indexes As List(Of Integer) = New List(Of Integer)
     Private Type As String
 
     'ピークサーチ関連の定数
-    Public Const RANGE = 5 '接線を求める際に参照するデータの個数、必ず奇数にすること
-    Public Grads As List(Of Double)
-    Public Data_Correct As List(Of (Double, Double))
+    Public Const RANGE = 2 '接線を求める際、前後何個のデータで最小二乗法するかという値
+    Public Grads As List(Of Double) = New List(Of Double)
+    Public Data_Correct_x As List(Of Double) = New List(Of Double)
+    Public Data_Correct_y As List(Of Double) = New List(Of Double)
 
     Sub New(xran As Integer, yran As Integer, pic As PictureBox, nameData As String, nameX As String, nameY As String)
         Me.Type = "PictureBox"
@@ -537,59 +576,42 @@ Public Class MyData2D
         Me.PictureBox.Refresh()
     End Sub
 
-    Sub output()
+    Sub output(ByVal path As String)
         'Using writer = New StreamWriter("")
     End Sub
 
     Sub peakSerchY(ByVal Y As Integer)
-        For i = Math.Ceiling(RANGE / 2) To Yran - 1 - Math.Truncate(RANGE / 2) Step 1
-            Dim grad As Double
-            Dim a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0
-            For j = (-1) * Math.Truncate(RANGE / 2) To Math.Truncate(RANGE / 2) Step 1
-                a1 += (i + j) * Me.Data(i + j, Y)
-                a2 += (i + j)
-                a3 += Me.Data(i + j, Y)
-                a4 += (i + j) ^ 2
-            Next
-            grad = (RANGE * a1 - a2 * a3) / (RANGE * a4 - a2 ^ 2)
-            Me.Grads.Add(grad)
-        Next
+        Console.WriteLine(Me.dataName)
+        For i = RANGE To Me.Yran - 1 - RANGE Step 1
+            If Me.Data(i - 2, Y) < Me.Data(i - 1, Y) Then
 
-        For k = 1 To Me.Grads.Count() - 2 Step 1
-            Console.WriteLine(k)
-            If Me.Grads(k - 1) >= 0 And Me.Grads(k) <= 0 Then
-                If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
-                    Maxima_indexes.Add(k - 1 + 2)
-                Else
-                    Maxima_indexes.Add(k + 2)
-                End If
-            ElseIf Me.Grads(k - 1) <= 0 And Me.Grads(k) >= 0 Then
-                If Abs(Me.Grads(k - 1)) >= Abs(Me.Grads(k)) Then
-                    Minimal_indexes.Add(k - 1 + 2)
-                Else
-                    Minimal_indexes.Add(k + 2)
-                End If
             End If
         Next
+
+
+
+        Console.WriteLine(Me.Maxima_indexes.Count)
+        Console.WriteLine(Me.Minimal_indexes.Count)
 
         Dim head As Integer
         Dim head_time As Double
         Dim wid As Double
-        Dim data_correct As List(Of (Double, Double))
         head = 0
 
         For current = 0 To Me.Xran - 1 Step 1
             If Me.Maxima_indexes.IndexOf(current) <> -1 Then
                 wid = 1.33 / (current - head + 1)
                 For j = head To current Step 1
-                    data_correct.Add((head_time + wid * j, Me.Data(j, Y)))
+                    Me.Data_Correct_x.Add((head_time + wid * j))
+                    Me.Data_Correct_y.Add(Me.Data(j, Y))
                 Next
                 head = current + 1
                 head_time += 1.33
             ElseIf Me.Minimal_indexes.IndexOf(current) <> -1 Then
                 wid = 1.33 / (current - head + 1)
                 For j = head To current Step 1
-                    data_correct.Add((head_time + wid * j, Me.Data(j, Y)))
+                    Me.Data_Correct_x.Add((head_time + wid * j))
+                    Me.Data_Correct_y.Add(Me.Data(j, Y))
                 Next
                 head = current + 1
                 head_time += 1.33
@@ -597,8 +619,8 @@ Public Class MyData2D
 
             End If
         Next
-        Me.Data_Correct = data_correct
-
+        Console.WriteLine(Me.Data_Correct_x.Count)
+        Console.WriteLine(Me.Data_Correct_y.Count)
     End Sub
 
     Sub plot_correct()
@@ -615,8 +637,8 @@ Public Class MyData2D
                 .Docking = Docking.Bottom
             End With
 
-            For i = 0 To Me.Data_Correct.Count - 1 Step 1
-                Me.Chart.Series(CType(Me.labelY, String)).Points.AddXY(Me.Data_Correct(i).Item1, Me.Data_Correct(i).Item2)
+            For i = 0 To Me.Data_Correct_x.Count - 1 Step 1
+                Me.Chart.Series(CType(Me.labelY, String)).Points.AddXY(Me.Data_Correct_x(i), Me.Data_Correct_y(i))
             Next
 
 
