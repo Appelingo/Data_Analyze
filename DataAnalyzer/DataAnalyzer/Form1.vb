@@ -134,13 +134,14 @@ Public Class Form1
 
         sections = Integer.Parse(TextBox7.Text)
         For i = 0 To sections - 1 Step 1
-            Using writer = New StreamWriter(fns + Signal_Strength(i).dataName + ".dat", False)
+            Using writer = New StreamWriter(fns + Signal_Strength(i).dataName + ".xls", False)
                 For x = 0 To Signal_Corrected(i).Count - 1 Step 1
-                    writer.WriteLine(Signal_Corrected(i)(x).Item2, Signal_Corrected(i)(x).Item1)
+                    writer.WriteLine(x.ToString + "," + Signal_Corrected(i)(x).Item2.ToString + "," + Signal_Corrected(i)(x).Item1.ToString)
                 Next
             End Using
         Next
     End Sub
+
 
 
 
@@ -294,37 +295,39 @@ Public Class Form1
 
         ReDim Signal_Corrected(sections)
         Dim mode = "UP"
-        Dim head = 0
-        Dim head_t = 0
+        Dim head As Double
+        Dim head_t As Double
         For sec = 0 To sections - 1 Step 1
             Signal_Corrected(sec) = New List(Of (Double, Double))
             Dim back2, back1, now, front1, front2 As Double
+            head = 0
+            head_t = 0
             For x = 2 To FileMax - 1 - 2 Step 1
                 back2 = Signal_Strength(sec).Data(x - 2, 0)
                 back1 = Signal_Strength(sec).Data(x - 1, 0)
                 now = Signal_Strength(sec).Data(x, 0)
                 front1 = Signal_Strength(sec).Data(x + 1, 0)
                 front2 = Signal_Strength(sec).Data(x + 2, 0)
-                If mode = "UP" Then
-                    If back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
-                        Dim cnt = x - head
-                        Dim wid = 1.33 / cnt
-                        For i = head To x
-                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
-                        Next
-                        head = x + 1
-                        head_t += 1.33
-                    End If
-                ElseIf mode = "DOWN" Then
-                    If back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
-                        Dim cnt = x - head
-                        Dim wid = 1.33 / cnt
-                        For i = head To x
-                            Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
-                        Next
-                        head = x + 1
-                        head_t += 1.33
-                    End If
+                If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
+
+                    Dim cnt = x - head
+                    Dim wid = 1.33 / cnt
+                    For i = head To x - 1
+                        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                    Next
+                    head = x
+                    head_t += 1.33
+                    mode = "DOWN"
+
+                ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
+                    Dim cnt = x - head
+                    Dim wid = 1.33 / cnt
+                    For i = head To x
+                        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                    Next
+                    head = x + 1
+                    head_t += 1.33
+                    mode = "UP"
                 End If
             Next
         Next
