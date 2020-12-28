@@ -297,9 +297,11 @@ Public Class Form1
         Dim mode = "UP"
         Dim head As Double
         Dim head_t As Double
+        Dim back2, back1, now, front1, front2 As Double
+        Dim cnt, wid As Double
         For sec = 0 To sections - 1 Step 1
             Signal_Corrected(sec) = New List(Of (Double, Double))
-            Dim back2, back1, now, front1, front2 As Double
+
             head = 0
             head_t = 0
             For x = 2 To FileMax - 1 - 2 Step 1
@@ -308,26 +310,41 @@ Public Class Form1
                 now = Signal_Strength(sec).Data(x, 0)
                 front1 = Signal_Strength(sec).Data(x + 1, 0)
                 front2 = Signal_Strength(sec).Data(x + 2, 0)
-                If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
 
-                    Dim cnt = x - head
-                    Dim wid = 1.33 / cnt
+                '案1 単純に大小関係で極値を探す
+                'If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
+
+                '    Dim cnt = x - head
+                '    Dim wid = 1.33 / cnt
+                '    For i = head To x - 1
+                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                '    Next
+                '    head = x
+                '    head_t += 1.33
+                '    mode = "DOWN"
+
+                'ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
+                '    Dim cnt = x - head
+                '    Dim wid = 1.33 / cnt
+                '    For i = head To x
+                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                '    Next
+                '    head = x + 1
+                '    head_t += 1.33
+                '    mode = "UP"
+                'End If
+
+                '案2 前後の差の掛け算の符号で判断する
+                If (now - back1) * (front1 - now) < 0 And (now - back2) * (front2 - now) < 0 Then
+
+                    cnt = x - head
+                    wid = 1.33 / cnt
                     For i = head To x - 1
                         Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
                     Next
                     head = x
                     head_t += 1.33
-                    mode = "DOWN"
 
-                ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
-                    Dim cnt = x - head
-                    Dim wid = 1.33 / cnt
-                    For i = head To x
-                        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
-                    Next
-                    head = x + 1
-                    head_t += 1.33
-                    mode = "UP"
                 End If
             Next
         Next
