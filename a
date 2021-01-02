@@ -1,0 +1,214 @@
+[33mcommit 434782f354ea650d69d36a273d9002dfa5b2f7f9[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Mon Dec 28 13:21:11 2020 +0900
+
+    [Change]Change the method of peak serching
+
+[33mcommit 9bebc640bcda1ce3aaab1688bcd5de449b70dfe2[m
+Merge: 2df3fd7 f7456cc
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 27 17:35:35 2020 +0900
+
+    push
+
+[33mcommit 2df3fd7aa55a8731904a29f0757283c596ecf790[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Fri Dec 25 20:09:34 2020 +0900
+
+    pull
+
+[33mcommit 27509d39d1e8630e475eaf96186d00ce8ffc5f1f[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Fri Dec 25 20:07:27 2020 +0900
+
+    [pull]
+
+[33mcommit f7456ccd9946f9049c3e7e0813a069c09b884caf[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Fri Dec 25 16:43:38 2020 +0900
+
+    [New]Add section outputting datas
+
+[33mcommit 35a3d4868a90702595eb9f7588716f667830a308[m
+Merge: a15068f c8771d6
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 23:11:25 2020 +0900
+
+    [pull]
+
+[33mcommit a15068f299d9f2f5cf86321822072bf05e7f3999[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 23:10:40 2020 +0900
+
+    a
+
+[33mcommit c8771d66ae48d279fd47036f1220ece19c40cb92[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 23:05:13 2020 +0900
+
+    [New]Add segment outputting Signal_Corrected()
+
+[33mcommit cdc0bf9f65db409484d942baacd0210ecdae8e32[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 19:12:55 2020 +0900
+
+    [New]Add Chart2
+
+[33mcommit a641e9274b516148e900fb03c45d59e87e4ff52f[m
+Merge: 2d378eb 19aa91b
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 18:11:28 2020 +0900
+
+    [Change]Update word file
+
+[33mcommit 2d378ebf1ddd0b314dfdf5646486ec50fc8b8745[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 18:08:21 2020 +0900
+
+    [pull:
+
+[33mcommit 19aa91b0e82910ddb04352f1ab388b8a853908fe[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 22 18:01:26 2020 +0900
+
+    [Change]Add the routine serching peaks
+
+[33mcommit cfab7f5163038237093145519456c540e65e26cd[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Mon Dec 21 00:31:34 2020 +0900
+
+    [New]Outputed datas
+
+[33mcommit 792597e3fb250a1dba9ea52510f4415b3f944dae[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Mon Dec 21 00:30:56 2020 +0900
+
+    [New]Add output() in MyData2D
+
+[33mcommit 347580c8985b8b4361c397dd15b3c6a2c64415a6[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 15 22:34:45 2020 +0900
+
+    [Change]Change the name of word file
+
+[33mcommit 723f3524ea1678a011f2b1e29a527b3ab0fefa74[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 15 22:29:38 2020 +0900
+
+    [New]Add word file
+
+[33mcommit b64ae755b0794f8726a0a14efce2c451b094459b[m
+Merge: 8007e9d 809a322
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Tue Dec 15 22:28:48 2020 +0900
+
+    [Change]ピークサーチを修正しようと試みる
+
+[33mcommit 8007e9da5049f8960fe6da88235b59e5a7a026fd[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 20:22:27 2020 +0900
+
+    pull
+
+[33mcommit 6284cdc0ecb24b16ff9279e4a3eee4473eb6d015[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 20:20:49 2020 +0900
+
+    Pulled
+
+[33mcommit 66d7d01067a59a7d165dff86d928ebb709bc1908[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 20:17:58 2020 +0900
+
+    Pulled
+
+[33mcommit 809a3229075a2878ccc30aaca8f18e05da6272c7[m[33m ([m[1;31mGithub/master[m[33m)[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 19:37:23 2020 +0900
+
+    [Change]Modified peakSerchY() in MyData2D
+
+[33mcommit 8242d9e0efdc9f40c3aad140c1cdb18764acd4f1[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 18:41:52 2020 +0900
+
+    [New]Add peakSerchY() in MyData2D
+
+[33mcommit cccdf7643d5ca30ba3d7e607a518d18ddce071f6[m
+Merge: 9cb2d57 c4d9940
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:37:54 2020 +0900
+
+    test
+
+[33mcommit 9cb2d57a9a7d7842ee41363805c6be2086700daa[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:36:16 2020 +0900
+
+    test
+
+[33mcommit c4d994031bda6b3d45a36908cc2060c98fcca71d[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:35:33 2020 +0900
+
+    test
+
+[33mcommit 540fdbafcaa89c16b6e75b2edabfa079b869cce8[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:30:55 2020 +0900
+
+    Pull test
+
+[33mcommit 60f507037b020d802677fc8eab25b94bbf3b8510[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:29:15 2020 +0900
+
+    test
+
+[33mcommit 2f95d5009896748cb40a738e33de168b03d7e3d9[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:26:12 2020 +0900
+
+    add all file
+
+[33mcommit 27b0c351cdf48e724b5bbdd0792e2a0afceb0182[m
+Author: Go Kasai Laptop <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:25:38 2020 +0900
+
+    a
+
+[33mcommit c6d9521a51c17a24e730d436ed3febca5850dff4[m[33m ([m[1;32mFileOpen[m[33m)[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sun Dec 13 13:07:47 2020 +0900
+
+    2020/12/13
+
+[33mcommit 5d0e9203e0fc0a9f5bd9e3b2a309be9c349196ee[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Sat Dec 12 14:50:10 2020 +0900
+
+    2020/12/12
+
+[33mcommit 31621409875ea7bd47314d6db98a805ef7e2fe2e[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Thu Nov 12 00:12:08 2020 +0900
+
+    GithubとVSを連携
+
+[33mcommit fc64e655e4893e202ab1039eb8b9d213429ab13d[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Fri Jul 17 23:12:02 2020 +0900
+
+    New Branch FileOpen
+
+[33mcommit fb4a79d64050a46b76690ce6eac24d5316f94f1c[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Thu Jul 16 16:57:59 2020 +0900
+
+    Add date
+
+[33mcommit 73e41be366bad54ee942361c33ad0f8cddea11e1[m
+Author: Kasai Go (Home Desktop) <kg0425@asagi.waseda.jp>
+Date:   Mon Jul 13 14:59:36 2020 +0900
+
+    Initialized
