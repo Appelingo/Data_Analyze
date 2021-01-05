@@ -62,6 +62,10 @@ Partial Class Form1
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,7 +91,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(62, 54)
+        Me.TextBox1.Location = New System.Drawing.Point(82, 54)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(274, 19)
         Me.TextBox1.TabIndex = 1
@@ -342,9 +346,9 @@ Partial Class Form1
         Me.Chart1.ChartAreas.Add(ChartArea1)
         Legend1.Name = "Legend1"
         Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(12, 111)
+        Me.Chart1.Location = New System.Drawing.Point(805, 810)
         Me.Chart1.Name = "Chart1"
-        Me.Chart1.Size = New System.Drawing.Size(657, 560)
+        Me.Chart1.Size = New System.Drawing.Size(231, 164)
         Me.Chart1.TabIndex = 37
         Me.Chart1.Text = "Chart1"
         '
@@ -371,21 +375,53 @@ Partial Class Form1
         Me.Chart2.ChartAreas.Add(ChartArea2)
         Legend2.Name = "Legend1"
         Me.Chart2.Legends.Add(Legend2)
-        Me.Chart2.Location = New System.Drawing.Point(931, 416)
+        Me.Chart2.Location = New System.Drawing.Point(1189, 821)
         Me.Chart2.Name = "Chart2"
         Series1.ChartArea = "ChartArea1"
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.Chart2.Series.Add(Series1)
-        Me.Chart2.Size = New System.Drawing.Size(312, 255)
+        Me.Chart2.Size = New System.Drawing.Size(185, 153)
         Me.Chart2.TabIndex = 40
         Me.Chart2.Text = "Chart2"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(0, 86)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(67, 12)
+        Me.Label13.TabIndex = 42
+        Me.Label13.Text = "Background:"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(82, 79)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(274, 19)
+        Me.TextBox8.TabIndex = 43
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(372, 77)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 44
+        Me.Button3.Text = "BG指定"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog3
+        '
+        Me.OpenFileDialog3.FileName = "OpenFileDialog3"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1370, 749)
+        Me.ClientSize = New System.Drawing.Size(1964, 1041)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Chart2)
         Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Label11)
@@ -473,4 +509,8 @@ Partial Class Form1
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents Chart2 As DataVisualization.Charting.Chart
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents OpenFileDialog3 As OpenFileDialog
 End Class
