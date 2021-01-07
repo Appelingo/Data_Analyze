@@ -357,30 +357,7 @@ Public Class Form1
                 front2 = Signal_Strength(sec).Data(x + 2, 0)
 
                 '案1 単純に大小関係で極値を探す
-                'If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
-
-                '    Dim cnt = x - head
-                '    Dim wid = 1.33 / cnt
-                '    For i = head To x - 1
-                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
-                '    Next
-                '    head = x
-                '    head_t += 1.33
-                '    mode = "DOWN"
-
-                'ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
-                '    Dim cnt = x - head
-                '    Dim wid = 1.33 / cnt
-                '    For i = head To x
-                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
-                '    Next
-                '    head = x + 1
-                '    head_t += 1.33
-                '    mode = "UP"
-                'End If
-
-                '案2 前後の差の掛け算の符号で判断する
-                If (now - back1) * (front1 - now) < 0 And (now - back2) * (front2 - now) < 0 Then
+                If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
 
                     cnt = x - head
                     wid = 1.33 / cnt
@@ -389,8 +366,31 @@ Public Class Form1
                     Next
                     head = x
                     head_t += 1.33
+                    mode = "DOWN"
 
+                ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
+                    cnt = x - head
+                    wid = 1.33 / cnt
+                    For i = head To x
+                        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                    Next
+                    head = x + 1
+                    head_t += 1.33
+                    mode = "UP"
                 End If
+
+                '案2 前後の差の掛け算の符号で判断する
+                'If (now - back1) * (front1 - now) < 0 And (now - back2) * (front2 - now) < 0 Then
+
+                '    cnt = x - head
+                '    wid = 1.33 / cnt
+                '    For i = head To x - 1
+                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                '    Next
+                '    head = x
+                '    head_t += 1.33
+
+                'End If
             Next
         Next
 
