@@ -45,6 +45,17 @@ Public Class Form1
         BG = True
     End Sub
 
+    Private Sub Mouse_Location(sender As Object, e As KeyEventArgs) Handles TextBox10.KeyDown
+        Dim PosX = System.Windows.Forms.Cursor.Position.X
+        Dim PosY = System.Windows.Forms.Cursor.Position.Y
+        If e.KeyCode = Keys.Space Then
+            TextBox9.Text = (PictureBox1.Location.X - PosX).ToString()
+            TextBox10.Text = (PictureBox1.Location.Y - PosY).ToString()
+            TextBox11.Text = (PictureBox2.Location.X - PosX).ToString()
+            TextBox12.Text = (PictureBox2.Location.X - PosY).ToString()
+        End If
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub

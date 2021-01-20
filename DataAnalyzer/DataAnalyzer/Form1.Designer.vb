@@ -66,6 +66,10 @@ Partial Class Form1
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -240,7 +244,7 @@ Partial Class Form1
         'PictureBox5
         '
         Me.PictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox5.Location = New System.Drawing.Point(1215, 114)
+        Me.PictureBox5.Location = New System.Drawing.Point(1227, 114)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(5, 360)
         Me.PictureBox5.TabIndex = 24
@@ -249,7 +253,7 @@ Partial Class Form1
         'PictureBox6
         '
         Me.PictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox6.Location = New System.Drawing.Point(998, 479)
+        Me.PictureBox6.Location = New System.Drawing.Point(998, 491)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(209, 5)
         Me.PictureBox6.TabIndex = 25
@@ -309,7 +313,7 @@ Partial Class Form1
         '
         'PictureBox9
         '
-        Me.PictureBox9.Location = New System.Drawing.Point(1226, 114)
+        Me.PictureBox9.Location = New System.Drawing.Point(1259, 114)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(50, 360)
         Me.PictureBox9.TabIndex = 32
@@ -317,7 +321,7 @@ Partial Class Form1
         '
         'PictureBox10
         '
-        Me.PictureBox10.Location = New System.Drawing.Point(998, 490)
+        Me.PictureBox10.Location = New System.Drawing.Point(998, 518)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(211, 50)
         Me.PictureBox10.TabIndex = 33
@@ -414,11 +418,43 @@ Partial Class Form1
         '
         Me.OpenFileDialog3.FileName = "OpenFileDialog3"
         '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(520, 610)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox9.TabIndex = 45
+        '
+        'TextBox10
+        '
+        Me.TextBox10.Location = New System.Drawing.Point(520, 635)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox10.TabIndex = 46
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Location = New System.Drawing.Point(1227, 491)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox11.TabIndex = 47
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(1227, 518)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox12.TabIndex = 48
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1964, 1041)
+        Me.Controls.Add(Me.TextBox12)
+        Me.Controls.Add(Me.TextBox11)
+        Me.Controls.Add(Me.TextBox10)
+        Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.TextBox8)
         Me.Controls.Add(Me.Label13)
@@ -513,4 +549,8 @@ Partial Class Form1
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents Button3 As Button
     Friend WithEvents OpenFileDialog3 As OpenFileDialog
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents TextBox12 As TextBox
 End Class
