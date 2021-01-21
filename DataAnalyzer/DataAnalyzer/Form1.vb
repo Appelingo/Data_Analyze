@@ -34,6 +34,17 @@ Public Class Form1
 
     Dim Signal_Corrected() As List(Of (Double, Double))
 
+    Const s11 = 315
+    Const f11 = 340
+    Const s12 = 350
+    Const f12 = 370
+    Const s13 = 380
+    Const f13 = 395
+    Const s14 = 405
+    Const f14 = 415
+    Const s15 = 420
+    Const f15 = 430
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
 
@@ -333,12 +344,19 @@ Public Class Form1
             Signal_Strength(i) = New MyData2D(FileMax, 1, Chart1, n + "次高調波の信号強度(X方向の積算より）", "XUV-IR delay", n + "次高調波")
         Next
 
+        Dim Ranges(sections) As (Integer, Integer)
+        Ranges(0) = (s11, f11)
+        Ranges(1) = (s12, f12)
+        Ranges(2) = (s13, f13)
+        Ranges(3) = (s14, f14)
+        Ranges(4) = (s15, f15)
         Dim signalMax = 0
+
         For sec = 0 To sections - 1 Step 1
             Dim unitesignals(FileMax, 1) As Double
             For d = 0 To FileMax - 1
                 Dim summation = 0
-                For x = sec * Strength_width To (sec + 1) * Strength_width - 1 Step 1
+                For x = Ranges(sec).Item1 To Ranges(sec).Item2 Step 1
                     summation += TotalYs(d).Data(x)
                 Next
                 If signalMax < summation Then
@@ -348,6 +366,7 @@ Public Class Form1
             Next
             Signal_Strength(sec).setData(unitesignals)
         Next
+
 
         ReDim Signal_Corrected(sections)
         Dim mode = "UP"

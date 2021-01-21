@@ -371,7 +371,7 @@ Partial Class Form1
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(100, 19)
         Me.TextBox7.TabIndex = 39
-        Me.TextBox7.Text = "6"
+        Me.TextBox7.Text = "5"
         '
         'Chart2
         '
