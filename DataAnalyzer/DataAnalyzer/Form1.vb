@@ -357,7 +357,7 @@ Public Class Form1
             For d = 0 To FileMax - 1
                 Dim summation = 0
                 For x = Ranges(sec).Item1 To Ranges(sec).Item2 Step 1
-                    summation += TotalYs(d).Data(x)
+                    summation += TotalRs(d).Data(x - 240)
                 Next
                 If signalMax < summation Then
                     signalMax = summation
