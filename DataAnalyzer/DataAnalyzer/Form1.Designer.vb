@@ -62,6 +62,14 @@ Partial Class Form1
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.OpenFileDialog3 = New System.Windows.Forms.OpenFileDialog()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -87,7 +95,7 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(62, 54)
+        Me.TextBox1.Location = New System.Drawing.Point(82, 54)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(274, 19)
         Me.TextBox1.TabIndex = 1
@@ -236,7 +244,7 @@ Partial Class Form1
         'PictureBox5
         '
         Me.PictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox5.Location = New System.Drawing.Point(1215, 114)
+        Me.PictureBox5.Location = New System.Drawing.Point(1227, 114)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(5, 360)
         Me.PictureBox5.TabIndex = 24
@@ -245,7 +253,7 @@ Partial Class Form1
         'PictureBox6
         '
         Me.PictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox6.Location = New System.Drawing.Point(998, 479)
+        Me.PictureBox6.Location = New System.Drawing.Point(998, 491)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(209, 5)
         Me.PictureBox6.TabIndex = 25
@@ -305,7 +313,7 @@ Partial Class Form1
         '
         'PictureBox9
         '
-        Me.PictureBox9.Location = New System.Drawing.Point(1226, 114)
+        Me.PictureBox9.Location = New System.Drawing.Point(1259, 114)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(50, 360)
         Me.PictureBox9.TabIndex = 32
@@ -313,7 +321,7 @@ Partial Class Form1
         '
         'PictureBox10
         '
-        Me.PictureBox10.Location = New System.Drawing.Point(998, 490)
+        Me.PictureBox10.Location = New System.Drawing.Point(998, 518)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(211, 50)
         Me.PictureBox10.TabIndex = 33
@@ -342,9 +350,9 @@ Partial Class Form1
         Me.Chart1.ChartAreas.Add(ChartArea1)
         Legend1.Name = "Legend1"
         Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(12, 111)
+        Me.Chart1.Location = New System.Drawing.Point(805, 810)
         Me.Chart1.Name = "Chart1"
-        Me.Chart1.Size = New System.Drawing.Size(657, 560)
+        Me.Chart1.Size = New System.Drawing.Size(231, 164)
         Me.Chart1.TabIndex = 37
         Me.Chart1.Text = "Chart1"
         '
@@ -363,7 +371,7 @@ Partial Class Form1
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(100, 19)
         Me.TextBox7.TabIndex = 39
-        Me.TextBox7.Text = "6"
+        Me.TextBox7.Text = "5"
         '
         'Chart2
         '
@@ -371,21 +379,85 @@ Partial Class Form1
         Me.Chart2.ChartAreas.Add(ChartArea2)
         Legend2.Name = "Legend1"
         Me.Chart2.Legends.Add(Legend2)
-        Me.Chart2.Location = New System.Drawing.Point(931, 416)
+        Me.Chart2.Location = New System.Drawing.Point(1189, 821)
         Me.Chart2.Name = "Chart2"
         Series1.ChartArea = "ChartArea1"
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.Chart2.Series.Add(Series1)
-        Me.Chart2.Size = New System.Drawing.Size(312, 255)
+        Me.Chart2.Size = New System.Drawing.Size(185, 153)
         Me.Chart2.TabIndex = 40
         Me.Chart2.Text = "Chart2"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(0, 86)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(67, 12)
+        Me.Label13.TabIndex = 42
+        Me.Label13.Text = "Background:"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(82, 79)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(274, 19)
+        Me.TextBox8.TabIndex = 43
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(372, 77)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 23)
+        Me.Button3.TabIndex = 44
+        Me.Button3.Text = "BG指定"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'OpenFileDialog3
+        '
+        Me.OpenFileDialog3.FileName = "OpenFileDialog3"
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(520, 610)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox9.TabIndex = 45
+        '
+        'TextBox10
+        '
+        Me.TextBox10.Location = New System.Drawing.Point(520, 635)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox10.TabIndex = 46
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Location = New System.Drawing.Point(1227, 491)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox11.TabIndex = 47
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(1227, 518)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(100, 19)
+        Me.TextBox12.TabIndex = 48
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1370, 749)
+        Me.ClientSize = New System.Drawing.Size(1964, 1041)
+        Me.Controls.Add(Me.TextBox12)
+        Me.Controls.Add(Me.TextBox11)
+        Me.Controls.Add(Me.TextBox10)
+        Me.Controls.Add(Me.TextBox9)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Chart2)
         Me.Controls.Add(Me.TextBox7)
         Me.Controls.Add(Me.Label11)
@@ -473,4 +545,12 @@ Partial Class Form1
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox7 As TextBox
     Friend WithEvents Chart2 As DataVisualization.Charting.Chart
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Button3 As Button
+    Friend WithEvents OpenFileDialog3 As OpenFileDialog
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents TextBox12 As TextBox
 End Class

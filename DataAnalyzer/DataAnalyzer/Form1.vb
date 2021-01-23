@@ -20,6 +20,9 @@ Public Class Form1
     Dim TotalRs() As MyData1D
     Dim TotalThetas() As MyData1D
 
+    Dim BG As Boolean
+    Dim Background(,) As Double
+
     Dim unitedTotalX As MyData2D
     Dim unitedTotalY As MyData2D
     Dim unitedTotalR As MyData2D
@@ -30,6 +33,40 @@ Public Class Form1
     Dim signal11, signal12, signal13, signal14, signal15, signal16 As MyData2D
 
     Dim Signal_Corrected() As List(Of (Double, Double))
+
+    Const s11 = 315
+    Const f11 = 340
+    Const s12 = 350
+    Const f12 = 370
+    Const s13 = 380
+    Const f13 = 395
+    Const s14 = 405
+    Const f14 = 415
+    Const s15 = 420
+    Const f15 = 430
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+
+        OpenFileDialog3.Title = "Background"
+        OpenFileDialog3.FileName = "D1.dat"
+        OpenFileDialog3.RestoreDirectory = True
+        OpenFileDialog3.ShowDialog()
+        TextBox8.Text = OpenFileDialog3.FileName
+        BG = True
+    End Sub
+
+    Private Sub Mouse_Location(sender As Object, e As KeyEventArgs) Handles TextBox10.KeyDown
+        Dim PosX = System.Windows.Forms.Cursor.Position.X
+        Dim PosY = System.Windows.Forms.Cursor.Position.Y
+        If e.KeyCode = Keys.Space Then
+            TextBox9.Text = (PictureBox1.Location.X - PosX).ToString()
+            TextBox10.Text = (PictureBox1.Location.Y - PosY).ToString()
+            TextBox11.Text = (PictureBox2.Location.X - PosX).ToString()
+            TextBox12.Text = (PictureBox2.Location.X - PosY).ToString()
+        End If
+    End Sub
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
@@ -63,6 +100,7 @@ Public Class Form1
         ReDim TotalYs(FileMax)
         ReDim TotalRs(FileMax)
         ReDim TotalThetas(FileMax)
+        ReDim Background(Xran, Yran)
 
         Dim sute, suteA As String
         Dim suteD As Double
@@ -71,6 +109,35 @@ Public Class Form1
         PictureBox1.Width = Xran
         PictureBox1.Height = Yran
 
+
+        If BG Then
+            Try
+                FileSystem.FileOpen(1, TextBox8.Text, OpenMode.Input)
+            Catch ex As System.IO.FileNotFoundException
+                Console.WriteLine("Cant read background")
+                Exit Sub
+            End Try
+
+            Dim bg, bgA As String
+            Dim bgD As Double
+            For x = 0 To Xran - 1 Step 1
+                For y = 0 To Yran - 1 Step 1
+                    FileSystem.Input(1, bg)
+                    bgD = Integer.Parse(bg)
+                    Console.WriteLine(y)
+                    Background(x, y) = Integer.Parse(bg)
+                Next
+                FileSystem.Input(1, bgA)
+            Next
+
+            FileSystem.FileClose(1)
+        Else
+            For x = 0 To Xran - 1 Step 1
+                For y = 0 To Yran - 1 Step 1
+                    Background(x, y) = 0
+                Next
+            Next
+        End If
         '##### file name ####
         For ff = 1 To FileMax '### for a file
             Dim pdata(Xran, Yran) As Double
@@ -93,7 +160,7 @@ Public Class Form1
                     Input(1, sute)
                     suteD = Integer.Parse(sute)
 
-                    pdata(i, j) = suteD '### pdata ##
+                    pdata(i, j) = suteD - Background(i, j) '### pdata ##
 
                 Next
                 Input(1, suteA)
@@ -122,19 +189,19 @@ Public Class Form1
         Dim fns As String
         OpenFileDialog2.Filter = "Folider|."
         OpenFileDialog2.Title = "Save bmp"
-        OpenFileDialog2.FileName = Dataname + "1.bmp"
+        OpenFileDialog2.FileName = ""
         OpenFileDialog2.CheckFileExists = False
         OpenFileDialog2.ShowDialog()
         PathOP = OpenFileDialog2.FileName
         fns = System.IO.Path.GetDirectoryName(PathOP)
 
         For i = 0 To FileMax - 1 Step 1
-            Datas(i).Image.Save(fns + Dataname + (i + 1).ToString + ".bmp")
+            Datas(i).Image.Save(PathOP + Dataname + (i + 1).ToString + ".bmp")
         Next
 
         sections = Integer.Parse(TextBox7.Text)
         For i = 0 To sections - 1 Step 1
-            Using writer = New StreamWriter(fns + Signal_Strength(i).dataName + ".xls", False)
+            Using writer = New StreamWriter(PathOP + Signal_Strength(i).dataName + ".xls", False)
                 For x = 0 To Signal_Corrected(i).Count - 1 Step 1
                     writer.WriteLine(x.ToString + "," + Signal_Corrected(i)(x).Item2.ToString + "," + Signal_Corrected(i)(x).Item1.ToString)
                 Next
@@ -277,12 +344,19 @@ Public Class Form1
             Signal_Strength(i) = New MyData2D(FileMax, 1, Chart1, n + "次高調波の信号強度(X方向の積算より）", "XUV-IR delay", n + "次高調波")
         Next
 
+        Dim Ranges(sections) As (Integer, Integer)
+        Ranges(0) = (s11, f11)
+        Ranges(1) = (s12, f12)
+        Ranges(2) = (s13, f13)
+        Ranges(3) = (s14, f14)
+        Ranges(4) = (s15, f15)
         Dim signalMax = 0
+
         For sec = 0 To sections - 1 Step 1
             Dim unitesignals(FileMax, 1) As Double
             For d = 0 To FileMax - 1
                 Dim summation = 0
-                For x = sec * Strength_width To (sec + 1) * Strength_width - 1 Step 1
+                For x = Ranges(sec).Item1 To Ranges(sec).Item2 Step 1
                     summation += TotalYs(d).Data(x)
                 Next
                 If signalMax < summation Then
@@ -293,13 +367,16 @@ Public Class Form1
             Signal_Strength(sec).setData(unitesignals)
         Next
 
+
         ReDim Signal_Corrected(sections)
         Dim mode = "UP"
         Dim head As Double
         Dim head_t As Double
+        Dim back2, back1, now, front1, front2 As Double
+        Dim cnt, wid As Double
         For sec = 0 To sections - 1 Step 1
             Signal_Corrected(sec) = New List(Of (Double, Double))
-            Dim back2, back1, now, front1, front2 As Double
+
             head = 0
             head_t = 0
             For x = 2 To FileMax - 1 - 2 Step 1
@@ -308,10 +385,12 @@ Public Class Form1
                 now = Signal_Strength(sec).Data(x, 0)
                 front1 = Signal_Strength(sec).Data(x + 1, 0)
                 front2 = Signal_Strength(sec).Data(x + 2, 0)
+
+                '案1 単純に大小関係で極値を探す
                 If mode = "UP" And back2 < back1 And back1 < now And now < front1 And front1 < front2 Then
 
-                    Dim cnt = x - head
-                    Dim wid = 1.33 / cnt
+                    cnt = x - head
+                    wid = 1.33 / cnt
                     For i = head To x - 1
                         Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
                     Next
@@ -320,8 +399,8 @@ Public Class Form1
                     mode = "DOWN"
 
                 ElseIf mode = "DOWN" And back2 > back1 And back1 > now And now > front1 And front1 > front2 Then
-                    Dim cnt = x - head
-                    Dim wid = 1.33 / cnt
+                    cnt = x - head
+                    wid = 1.33 / cnt
                     For i = head To x
                         Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
                     Next
@@ -329,6 +408,19 @@ Public Class Form1
                     head_t += 1.33
                     mode = "UP"
                 End If
+
+                '案2 前後の差の掛け算の符号で判断する
+                'If (now - back1) * (front1 - now) < 0 And (now - back2) * (front2 - now) < 0 Then
+
+                '    cnt = x - head
+                '    wid = 1.33 / cnt
+                '    For i = head To x - 1
+                '        Signal_Corrected(sec).Add((Signal_Strength(sec).Data(i, 0), head_t + wid * (i - head)))
+                '    Next
+                '    head = x
+                '    head_t += 1.33
+
+                'End If
             Next
         Next
 
@@ -539,6 +631,9 @@ Public Class MyData2D
                         Console.WriteLine(Me.dataName + "のデータはすべて0です")
                     Else
                         deg = Int(Data(x, y) / (Me.Max - Me.Min) * 255)
+                        If deg < 0 Then
+                            deg = 0
+                        End If
                     End If
 
                     Dim brush As New SolidBrush(Color.FromArgb(deg, deg, deg))
