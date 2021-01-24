@@ -34,16 +34,16 @@ Public Class Form1
 
     Dim Signal_Corrected() As List(Of (Double, Double))
 
-    Const s11 = 315
+    Const s11 = 310
     Const f11 = 340
-    Const s12 = 350
-    Const f12 = 370
-    Const s13 = 380
-    Const f13 = 395
-    Const s14 = 405
-    Const f14 = 415
-    Const s15 = 420
-    Const f15 = 430
+    Const s12 = 355
+    Const f12 = 380
+    Const s13 = 390
+    Const f13 = 415
+    Const s14 = 420
+    Const f14 = 440
+    Const s15 = 440
+    Const f15 = 455
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
