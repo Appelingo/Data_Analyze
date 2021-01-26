@@ -39,11 +39,13 @@ Public Class Form1
     Const s12 = 355
     Const f12 = 380
     Const s13 = 390
-    Const f13 = 415
+    Const f13 = 410
     Const s14 = 420
-    Const f14 = 440
+    Const f14 = 435
     Const s15 = 440
     Const f15 = 455
+    Const s16 = 460
+    Const f16 = 470
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
@@ -66,6 +68,8 @@ Public Class Form1
             TextBox12.Text = (PictureBox2.Location.X - PosY).ToString()
         End If
     End Sub
+
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -350,6 +354,7 @@ Public Class Form1
         Ranges(2) = (s13, f13)
         Ranges(3) = (s14, f14)
         Ranges(4) = (s15, f15)
+        Ranges(5) = (s16, f16)
         Dim signalMax = 0
 
         For sec = 0 To sections - 1 Step 1
@@ -357,7 +362,7 @@ Public Class Form1
             For d = 0 To FileMax - 1
                 Dim summation = 0
                 For x = Ranges(sec).Item1 To Ranges(sec).Item2 Step 1
-                    summation += TotalRs(d).Data(x - 240)
+                    summation += TotalYs(d).Data(x)
                 Next
                 If signalMax < summation Then
                     signalMax = summation
