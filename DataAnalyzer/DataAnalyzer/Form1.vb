@@ -211,6 +211,21 @@ Public Class Form1
                 Next
             End Using
         Next
+
+        'シフトの計算
+        Dim An = 4
+        Dim Bn = 151
+        Using writer = New StreamWriter(PathOP + "Shift_A.xls", False)
+            For x = 0 To TotalYs(An).Data.Length - 1 Step 1
+                writer.WriteLine(x.ToString + " " + TotalYs(An).Data(x).ToString)
+            Next
+        End Using
+        Using writer = New StreamWriter(PathOP + "Shift_B.xls", False)
+            For x = 0 To TotalYs(Bn).Data.Length - 1 Step 1
+                writer.WriteLine(x.ToString + " " + TotalYs(Bn).Data(x).ToString)
+            Next
+        End Using
+
     End Sub
 
 
@@ -460,6 +475,8 @@ Public Class Form1
         unitedTotalY.draw()
         unitedTotalR.draw()
         unitedTotalTheta.draw()
+
+
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
