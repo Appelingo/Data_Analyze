@@ -220,9 +220,11 @@ Public Class Form1
                 writer.WriteLine(x.ToString + " " + TotalYs(An).Data(x).ToString)
             Next
         End Using
+
         Using writer = New StreamWriter(PathOP + "Shift_B.xls", False)
+            writer.WriteLine("x " + (Bn - 9).ToString + " " + (Bn - 8).ToString + " " + (Bn - 7).ToString + " " + (Bn - 6).ToString + " " + (Bn - 5).ToString + " " + (Bn - 4).ToString + " " + (Bn - 3).ToString + " " + (Bn - 2).ToString + " " + (Bn - 1).ToString + " " + (Bn).ToString)
             For x = 0 To TotalYs(Bn).Data.Length - 1 Step 1
-                writer.WriteLine(x.ToString + " " + TotalYs(Bn).Data(x).ToString)
+                writer.WriteLine(x.ToString + " " + TotalYs(Bn - 9).Data(x).ToString + " " + TotalYs(Bn - 8).Data(x).ToString + " " + TotalYs(Bn - 7).Data(x).ToString + " " + TotalYs(Bn - 6).Data(x).ToString + " " + TotalYs(Bn - 5).Data(x).ToString + " " + TotalYs(Bn - 4).Data(x).ToString + " " + TotalYs(Bn - 3).Data(x).ToString + " " + TotalYs(Bn - 2).Data(x).ToString + " " + TotalYs(Bn - 1).Data(x).ToString + " " + TotalYs(Bn).Data(x).ToString)
             Next
         End Using
 
